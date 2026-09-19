@@ -7,6 +7,6 @@ typedef struct {
     int localizacao;
     TIPO_pokelista pokelista;
     int pokebolas;
-}   
+}   TIPO_trinador;
 
 #endif
