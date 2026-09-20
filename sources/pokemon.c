@@ -1,5 +1,7 @@
 #include "pokemon.h"
-
+#define X 0
+#define Y 1
+//Alterei para ficar mais facil de visualizar o (X,Y)
 
 int getPokeId(TipoPokemon *pokemon){
     if(pokemon->Id<9999){
@@ -45,16 +47,10 @@ int getPokeTipo(TipoPokemon *pokemon, char tiposaida[10]){
     }
 }
 
-int getPokeLocalizacao(TipoPokemon *pokemon, int *x, int *y){
-    if((pokemon->Localizacao [0] > 0) || (pokemon->Localizacao [1] > 0)){
-       *x = pokemon->Localizacao [0];
-       *y = pokemon->Localizacao [1];
-       return 0;
-    }
-    else{
-        printf("\nerro ao receber Localizacao do pokemon.\n");
-        return -1;
-    }
+int getPokeLocalizacao(TipoPokemon *pokemon, int *posX,int *posY){
+   *posX = pokemon->Localizacao[X];
+   *posY = pokemon->Localizacao[Y];
+    return 0;
 }
 
 int ImprimePokemon(TipoPokemon *pokemon){

@@ -20,7 +20,7 @@ int RemovePokemon(PokeLista *Lista,int id){ /* Apaga o pokemon da Lista Pelo ID 
         return -1; /*Padrão adotado de retorno de erro = -1*/
     }
     while(Auxiliar1 != NULL){
-        if(Auxiliar1->Pokemon->Id == id){
+        if(Auxiliar1->Pokemon.Id == id){
             Auxiliar1 = Auxiliar1->Proximo;
             free(Auxiliar0->Proximo);
             Auxiliar0->Proximo = Auxiliar1;
@@ -39,10 +39,11 @@ int RemovePokemon(PokeLista *Lista,int id){ /* Apaga o pokemon da Lista Pelo ID 
 int BuscaPokemon(PokeLista *Lista,int id, TipoPokemon *pokemon){ /* Busca o Pokemon na lista pelo ID, e retorna com parametro de saida */
     PokeCelula *Auxiliar = Lista->Primeiro;
     while(Auxiliar != NULL){
-        if((Auxiliar->Pokemon->Id) == id){
+        if((Auxiliar->Pokemon.Id) == id){
             *pokemon = Auxiliar->Pokemon;
                 return 1;
         }
+
     }
     printf("\nErro Id Invalido.");
     return -1; /*Padrão adotado de retorno de erro = -1*/

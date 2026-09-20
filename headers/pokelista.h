@@ -5,7 +5,7 @@
 #include "pokemon.h"
 
 typedef struct {
-    PokeCelula * Primeiro, *Ultimo;
+    PokeCelula *Primeiro, *Ultimo;
 }PokeLista;
 
 void InicializaLista(PokeLista *Lista);
