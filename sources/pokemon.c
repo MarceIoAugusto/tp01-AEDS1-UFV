@@ -6,7 +6,7 @@ int getPokeId(TipoPokemon *pokemon){
     return pokemon->Id;
     }
     else{ 
-        printf("\nerro ao receber Id do pokemon.\n")
+        printf("\nerro ao receber Id do pokemon.\n");
         return -1;
     }
 }
@@ -16,7 +16,7 @@ int getPokeNumero(TipoPokemon *pokemon){
     return pokemon->Id;
     }
     else{ 
-        printf("\nerro ao receber Numero do pokemon.\n")
+        printf("\nerro ao receber Numero do pokemon.\n");
         return -1;
     }
 }
@@ -28,7 +28,7 @@ int getPokeNome(TipoPokemon *pokemon, char nomesaida[13]){
         }
     }
     else{
-        printf("\nerro ao receber Nome do pokemon.\n")
+        printf("\nerro ao receber Nome do pokemon.\n");
         return -1;
     }
 }
@@ -40,7 +40,7 @@ int getPokeTipo(TipoPokemon *pokemon, char tiposaida[10]){
         }
     }
     else{
-        printf("\nerro ao receber Tipo do pokemon.\n")
+        printf("\nerro ao receber Tipo do pokemon.\n");
         return -1;
     }
 }
@@ -52,8 +52,41 @@ int getPokeLocalizacao(TipoPokemon *pokemon, int *x, int *y){
        return 0;
     }
     else{
-        printf("\nerro ao receber Localizacao do pokemon.\n")
+        printf("\nerro ao receber Localizacao do pokemon.\n");
         return -1;
     }
+}
+
+int ImprimePokemon(TipoPokemon *pokemon){
+    char PrintNome[13];
+    char PrintTipo[10];
+    int x,y;
+    getPokeNome(pokemon, &PrintNome);
+    getPokeTipo(pokemon, &PrintTipo);
+    getLocalizacao(pokemon, &x,&y);
+    printf("\n########## Imprimindo informacoes do Pokemon ##########\n");
+    printf("\nId: %d", getPokeId(pokemon));
+    printf("\nNome: ");
+        for(int i=0; i<13;i++){
+            if(PrintNome[i]!='\0'){
+                printf("%c",PrintNome[i]);
+            }
+            else{
+                break;
+            }
+        }
+    printf("\nNumero na Pokedex: %d",getPokeNumero(pokemon));
+    printf("\nTipo: ");
+    for(int i=0; i<10;i++){
+            if(PrintTipo[i]!='\0'){
+                printf("%c",PrintTipo[i]);
+            }
+            else{
+                break;
+            }
+        }
+    printf("\nCoordenadas de localizacao atual: X;%d __ Y;%d",x,y);
+    printf("\n############### Fim de Impressão ###############\n");
+
 }
 
