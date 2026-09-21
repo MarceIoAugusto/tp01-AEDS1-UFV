@@ -3,6 +3,7 @@
 
 #include <stdio.h>
 
+
 typedef struct {
     int Id;
     int Numero;

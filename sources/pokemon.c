@@ -13,7 +13,7 @@ int getPokeId(TipoPokemon *pokemon){
 
 int getPokeNumero(TipoPokemon *pokemon){
     if((pokemon->Numero>0) && (pokemon->Numero<1026)){ /*numero maximo de pokemon na pokedex*/
-    return pokemon->Id;
+    return pokemon->Numero;
     }
     else{ 
         printf("\nerro ao receber Numero do pokemon.\n");
@@ -22,7 +22,7 @@ int getPokeNumero(TipoPokemon *pokemon){
 }
 
 int getPokeNome(TipoPokemon *pokemon, char nomesaida[13]){
-    if(pokemon->Nome[12] == '/0'){
+    if(pokemon->Nome[12] == '\0'){
         for(int i=0;i<13;i++){
             nomesaida[i] = pokemon->Nome[i];
         }
@@ -45,7 +45,7 @@ int getPokeTipo(TipoPokemon *pokemon, char tiposaida[10]){
     }
 }
 
-int getPokeLocalizacao(TipoPokemon *pokemon, int *x, int *y){
+int getPokeLocalizacao(TipoPokemon *pokemon, float *x, float *y){
     if((pokemon->Localizacao [0] > 0) || (pokemon->Localizacao [1] > 0)){
        *x = pokemon->Localizacao [0];
        *y = pokemon->Localizacao [1];
