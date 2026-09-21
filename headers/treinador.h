@@ -13,6 +13,7 @@ typedef struct {
 
 void inicializa(FILE * entrada,TipoTreinador *treinador);
 void movimentacao(TipoPokemon *pokemon,TipoTreinador *treinador, int alvo);
+void CapturaPokemon(TipoPokemon *pokemon, TipoTreinador *treinador,int indice);
 
 //Funçoes para receber os dados do Treinador
 int getTreinadorPos(TipoTreinador *treinador, double pos[2]);
