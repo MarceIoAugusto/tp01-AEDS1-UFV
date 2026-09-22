@@ -18,7 +18,7 @@ void CapturaPokemon(TipoPokemon *pokemon, TipoTreinador *treinador, int indice);
 
 // Funçoes para receber os dados do Treinador
 int getTreinadorPos(TipoTreinador *treinador, double pos[2]);
-int getTreinadorID(TipoTreinador *treinador, int *IDsaida);
+int getTreinadorID(TipoTreinador *treinador);
 
 // Funçoes para alterar os dados do Treinador
 int setTreinadorPos(TipoTreinador *treinador, double pos[2]);

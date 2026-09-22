@@ -61,3 +61,6 @@ int BuscaPokemon(PokeLista *Lista, int id, TipoPokemon *pokemon) { /* Busca o Po
     printf("\nErro Id Invalido.");
     return -1; /*Padrão adotado de retorno de erro = -1*/
 }
+PokeLista *getPrimeiroItem(PokeLista Lista) {
+    return Lista.Primeiro;
+}

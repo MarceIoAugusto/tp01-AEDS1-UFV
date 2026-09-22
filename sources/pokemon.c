@@ -1,6 +1,7 @@
 #include "pokemon.h"
 #define X 0
 #define Y 1
+#define NOME 50
 // Alterei para ficar mais facil de visualizar o (X,Y)
 
 int getPokeId(TipoPokemon *pokemon) {
@@ -21,9 +22,9 @@ int getPokeNumero(TipoPokemon *pokemon) {
     }
 }
 
-int getPokeNome(TipoPokemon *pokemon, char nomesaida[13]) {
-    if (pokemon->Nome[12] == '\0') {
-        for (int i = 0; i < 13; i++) {
+int getPokeNome(TipoPokemon *pokemon, char nomesaida[NOME]) {
+    if (pokemon->Nome[NOME - 1] == '\0') {
+        for (int i = 0; i < NOME; i++) {
             nomesaida[i] = pokemon->Nome[i];
         }
     } else {

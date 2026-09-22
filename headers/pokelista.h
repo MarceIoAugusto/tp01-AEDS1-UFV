@@ -7,13 +7,14 @@
 
 typedef struct {
     PokeCelula *Primeiro, *Ultimo;
-}PokeLista;
+} PokeLista;
 
 void InicializaLista(PokeLista *Lista);
-void InserePokemon(PokeLista *Lista,TipoPokemon *pokemon);
-int RemovePokemon(PokeLista *Lista,int id);
+void InserePokemon(PokeLista *Lista, TipoPokemon *pokemon);
+int RemovePokemon(PokeLista *Lista, int id);
 int RemoveUltimoPokemon(PokeLista *Lista);
-int BuscaPokemon(PokeLista *Lista,int id,TipoPokemon *pokemon);
+int BuscaPokemon(PokeLista *Lista, int id, TipoPokemon *pokemon);
 void ImprimeLista();
+ getPrimeiroItem(PokeLista *Lista);
 
 #endif
