@@ -96,8 +96,8 @@ void CapturaPokemon(TipoPokemon *pokemon, TipoTreinador *treinador,int indice){
         printf("O Treinador %s nao tem pokebolas suficientes\n",treinador[indice]);
     }
 }
-void RemoverPokemonTreinador(TipoTreinador *treinador){
-    TipoPokemon PokemonRetirado = treinador->pokelista.Ultimo->Pokemon;
+TipoPokemon RemoverPokemonTreinador(TipoTreinador *treinador){
+    
     
 }
 int getTreinadorID(TipoTreinador *treinador, int *IDsaida){
