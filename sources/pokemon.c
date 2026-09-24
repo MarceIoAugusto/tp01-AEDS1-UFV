@@ -57,7 +57,7 @@ int getPokeLocalizacao(TipoPokemon *pokemon, float *x, float *y){
     }
 }
 
-int ImprimePokemon(TipoPokemon *pokemon){
+int ImprimePokemon(TipoPokemon *pokemon){ /*### Remover os GET e SET, Fazer uma validação única na impressão*/
     char PrintNome[13];
     char PrintTipo[10];
     int x,y;

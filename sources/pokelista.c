@@ -38,7 +38,7 @@ int RemovePokemon(PokeLista *Lista,int id){ /* Apaga o pokemon da Lista Pelo ID 
     return -1; /*Padrão adotado de retorno de erro = -1*/
 }
 
-int RemoveUltimoPokemon(PokeLista *Lista){
+int RemovePrimeiroPokemon(PokeLista *Lista){
     if(Lista->Primeiro == Lista->Ultimo){
         printf("\nErro Lista Vazia.");
         return -1; /*Padrão adotado de retorno de erro = -1*/
