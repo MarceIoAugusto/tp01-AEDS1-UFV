@@ -1,19 +1,25 @@
 #ifndef POKELISTA_H
 #define POKELISTA_H
 
-#include "pokecelula.h"
 #include "pokemon.h"
 #include <stdlib.h>
 
+typedef struct PokeCelula{
+    TipoPokemon Pokemon;
+    struct PokeCelula *Proximo;
+}PokeCelula;
+
+
 typedef struct {
-    PokeCelula * Primeiro, *Ultimo;
-}PokeLista;
+    PokeCelula *Primeiro, *Ultimo;
+} PokeLista;
 
-void InicializaLista(PokeLista *Lista);
-void InserePokemon(PokeLista *Lista,TipoPokemon *pokemon);
-int RemovePokemon(PokeLista *Lista,int id);
-int RemoveUltimoPokemon(PokeLista *Lista);
-int BuscaPokemon(PokeLista *Lista,int id,TipoPokemon *pokemon);
-void ImprimeLista();
+void InicializaLista(PokeLista *Lista); //Faz a inicializacao da lista
+void InserePokemon(PokeLista *Lista, TipoPokemon *pokemon); //Insere pokemon no final da lista
+int RemovePokemon(PokeLista *Lista, TipoPokemon *pokemon); 
+int BuscaPokemon(PokeLista *Lista, int id, TipoPokemon *pokemon);
+void ImprimeLista(PokeLista *Lista);
 
+/* void getPrimeiroItem(PokeLista *Lista);
+*/
 #endif
