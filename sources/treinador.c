@@ -1,6 +1,7 @@
 #include "treinador.h"
 #include "cabecalho.h"
 #include "pokelista.h"
+#include "pokemon.h"
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -123,15 +124,21 @@ void ImprimeTreinador(TipoTreinador treinador) {
 int getTreinadorID(TipoTreinador *treinador) {
     return treinador->id;
 }
-
-int getTreinadorPos(TipoTreinador *treinador, double pos[2] /*<--saida*/) {
+double* getTreinadorPos(TipoTreinador *treinador){
+    double pos[2];
     pos[X] = treinador->pos[X];
     pos[Y] = treinador->pos[Y];
-    return 0;
+    return pos;
 }
-
-int setTreinadorPos(TipoTreinador *treinador, double pos[2] /*<--entrada*/) {
+char* getTreinadorNome(TIpoTreinador *treinador){
+    return treinador->nome
+}
+void setTreinadorPos(TipoTreinador *treinador, double pos[2]) {
     treinador->pos[X] = pos[X];
     treinador->pos[Y] = pos[Y];
-    return 0;
+    return;
+}
+void setTreinadorPokebolas(TipoTreinador *treinador,int pokebolas){
+    treinador->pokebolas = treinador->pokebolas + pokebolas
+    return;
 }
