@@ -3,7 +3,6 @@
 
 #include "cabecalho.h"
 #include "pokelista.h"
-#include "cabecalho.h"
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -11,14 +10,14 @@
 typedef struct
 {
     int id;
-    char nome[TAM_NOME];
+    char nome[TAM_NOMET];
     double pos[2];
     PokeLista pokelista;
     int pokebolas;
 } TipoTreinador;
 
 void inicializaTreinador(TipoTreinador *treinador, int ID, char *nomeTemp, int pokebolTemp);
-int leTreinador(FILE * arqtreinador,TipoTreinador *treinador, int id);
+int leTreinador(FILE *arqtreinador, TipoTreinador *treinador, int id);
 void movimentacao(TipoPokemon *pokemon, TipoTreinador *treinador, int alvo);
 void CapturaPokemon(TipoPokemon *pokemon, TipoTreinador *treinador, int indice);
 

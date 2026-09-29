@@ -47,54 +47,51 @@ int getPokeLocalizacao(TipoPokemon *pokemon, float *posX, float *posY) {
     return 0;
 }
 
-void setPokeId(TipoPokemon *pokemon,int identrada){
-    pokemon->Id=identrada;
+void setPokeId(TipoPokemon *pokemon, int identrada) {
+    pokemon->Id = identrada;
     return;
 }
 
-void setPokeNumero(TipoPokemon *pokemon, int numeroentrada){
-    pokemon->Numero=numeroentrada;
+void setPokeNumero(TipoPokemon *pokemon, int numeroentrada) {
+    pokemon->Numero = numeroentrada;
     return;
 }
 
-void setPokeNome(TipoPokemon *pokemon,char *nomeentrada){
-    strncpy(pokemon->Nome,nomeentrada,sizeof(pokemon->Nome));
+void setPokeNome(TipoPokemon *pokemon, char *nomeentrada) {
+    strncpy(pokemon->Nome, nomeentrada, sizeof(pokemon->Nome));
     return;
 }
 
-void setPokeTipo(TipoPokemon *pokemon,char *tipoentrada){
-    strncpy(pokemon->Tipo,tipoentrada,sizeof(pokemon->Tipo));
+void setPokeTipo(TipoPokemon *pokemon, char *tipoentrada) {
+    strncpy(pokemon->Tipo, tipoentrada, sizeof(pokemon->Tipo));
     return;
 }
 
-void setPokeLocalizacao(TipoPokemon *pokemon, float x, float y){
-    pokemon->Localizacao [X] = x;
-    pokemon->Localizacao [Y] = y;
+void setPokeLocalizacao(TipoPokemon *pokemon, float x, float y) {
+    pokemon->Localizacao[X] = x;
+    pokemon->Localizacao[Y] = y;
     return;
 }
 
-int LePokemon(FILE* arquivo, int numero, TipoPokemon *saida){
+int LePokemon(FILE *arquivo, int numero, TipoPokemon *saida) {
     int Id;
-    char Nome [TAM_NOMEP];
-    char Tipo [TAM_TIPO];
+    char Nome[TAM_NOMEP];
+    char Tipo[TAM_TIPO];
     float x, y;
-    if (fscanf(arquivo,"%d %12s %9s %f %f",&Id,Nome,Tipo,&x,&y) == 5){
-        InicializaPokemon( saida, Id, numero, Nome, Tipo, x, y);
+    if (fscanf(arquivo, "%d %12s %9s %f %f", &Id, Nome, Tipo, &x, &y) == 5) {
+        InicializaPokemon(saida, Id, numero, Nome, Tipo, x, y);
         return 1;
-    }
-    else{
+    } else {
         return -1;
     }
 }
 
-
-
-int InicializaPokemon(TipoPokemon *pokemon, int identrada, int numeroentrada, char *nomeentrada, char *tipoentrada,float x, float y){
-    setPokeId(pokemon,identrada);
-    setPokeNumero(pokemon,numeroentrada);
-    setPokeNome(pokemon,nomeentrada);
-    setPokeTipo(pokemon,tipoentrada);
-    setPokeLocalizacao(pokemon,x,y);
+int InicializaPokemon(TipoPokemon *pokemon, int identrada, int numeroentrada, char *nomeentrada, char *tipoentrada, float x, float y) {
+    setPokeId(pokemon, identrada);
+    setPokeNumero(pokemon, numeroentrada);
+    setPokeNome(pokemon, nomeentrada);
+    setPokeTipo(pokemon, tipoentrada);
+    setPokeLocalizacao(pokemon, x, y);
     return 1;
 }
 

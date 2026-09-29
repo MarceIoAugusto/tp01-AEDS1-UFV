@@ -9,12 +9,12 @@
 void ImprimeInicioMissao(TipoTreinador *treinador, int numero_fugitivos) {
     // Variaveis
     double *pos;
-    char nome[TAM_NOME];
+    char nome[TAM_NOMET];
     int pokebol;
     printf("========================================\n");
     printf("           INICIO DA MISSAO             \n");
     printf("========================================\n");
-    for (int i = 0; i < MAX_TREINADORES; i++) {
+    for (int i = 0; i < NUM_TREINADORES; i++) {
         // Entradas
         pos = getTreinadorPos(&treinador[i]);
         *nome = getTreinadorNome(treinador[i]);
@@ -22,4 +22,5 @@ void ImprimeInicioMissao(TipoTreinador *treinador, int numero_fugitivos) {
         printf("Treinador(a) %s: Posicao (%d,%d) | Pokebolas: %d\n");
     }
     printf("\nPokemons fugitivos a serem resgatados: %d\n");
+    return;
 }
