@@ -1,8 +1,8 @@
 #ifndef TREINADOR_H
 #define TREINADOR_H
 
-#include "pokelista.h"
 #include "cabecalho.h"
+#include "pokelista.h"
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -14,18 +14,26 @@ typedef struct
     double pos[2];
     PokeLista pokelista;
     int pokebolas;
+    double distancia;
+
 } TipoTreinador;
 
 void inicializaTreinador(TipoTreinador *treinador, int ID, char *nomeTemp, int pokebolTemp);
-int leTreinador(FILE * arqtreinador,TipoTreinador *treinador, int id);
+int leTreinador(FILE *arqtreinador, TipoTreinador *treinador, int id);
 void movimentacao(TipoPokemon *pokemon, TipoTreinador *treinador, int alvo);
-void CapturaPokemon(TipoPokemon *pokemon, TipoTreinador *treinador, int indice);
+int CapturaPokemon(TipoPokemon *pokemon, TipoTreinador *treinador, int indice);
+TipoPokemon RemoverPokemonTreinador(TipoTreinador *treinador);
+void ImprimeTreinador(TipoTreinador treinador);
 
 // Funçoes para receber os dados do Treinador
-int getTreinadorPos(TipoTreinador *treinador, double pos[2]);
+double *getTreinadorPos(TipoTreinador *treinador);
 int getTreinadorID(TipoTreinador *treinador);
+double getTreinadorDistancia(TipoTreinador *treinador);
+char *getTreinadorNome(TipoTreinador *treinador);
+int getTreinadorPokebolas(TipoTreinador *treinador);
 
 // Funçoes para alterar os dados do Treinador
-int setTreinadorPos(TipoTreinador *treinador, double pos[2]);
+void setTreinadorPos(TipoTreinador *treinador, double *pos);
+void setTreinadorPokebolas(TipoTreinador *treinador, int pokebolas);
 
 #endif
