@@ -44,4 +44,11 @@ int BuscaPokemon(PokeLista *Lista, int id, TipoPokemon *pokemon) { /* Busca o Po
 PokeLista *getPrimeiroItem(PokeLista Lista) {
     return Lista.Primeiro;
 }
-*/
+void ImprimeLista(PokeLista *Lista) {
+    PokeCelula *curr;
+    curr = Lista->Primeiro;
+
+    while (curr->Proximo) {
+        return;
+    }
+}

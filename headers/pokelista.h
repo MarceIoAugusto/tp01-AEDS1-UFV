@@ -18,7 +18,12 @@ void InicializaLista(PokeLista *Lista); //Faz a inicializacao da lista
 void InserePokemon(PokeLista *Lista, TipoPokemon *pokemon); //Insere pokemon no final da lista
 int RemovePokemon(PokeLista *Lista, TipoPokemon *pokemon); 
 int BuscaPokemon(PokeLista *Lista, int id, TipoPokemon *pokemon);
+<<<<<<< HEAD
+void ImprimeLista();
+=======
 void ImprimeLista(PokeLista *Lista);
+>>>>>>> 4502fcc78b658804d29c6c3f291a88e03662548b
+PokeLista *getPrimeiroItem(PokeLista Lista);
 
 /* void getPrimeiroItem(PokeLista *Lista);
 */

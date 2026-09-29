@@ -1,6 +1,7 @@
 #ifndef TREINADOR_H
 #define TREINADOR_H
 
+#include "cabecalho.h"
 #include "pokelista.h"
 #include "cabecalho.h"
 #include <math.h>
@@ -10,7 +11,7 @@
 typedef struct
 {
     int id;
-    char nome[50];
+    char nome[TAM_NOME];
     double pos[2];
     PokeLista pokelista;
     int pokebolas;
@@ -22,7 +23,7 @@ void movimentacao(TipoPokemon *pokemon, TipoTreinador *treinador, int alvo);
 void CapturaPokemon(TipoPokemon *pokemon, TipoTreinador *treinador, int indice);
 
 // Funçoes para receber os dados do Treinador
-int getTreinadorPos(TipoTreinador *treinador, double pos[2]);
+double *getTreinadorPos(TipoTreinador *treinador);
 int getTreinadorID(TipoTreinador *treinador);
 
 // Funçoes para alterar os dados do Treinador
