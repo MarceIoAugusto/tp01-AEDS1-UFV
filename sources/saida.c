@@ -68,15 +68,3 @@ void ConclusaoDaMissao(TipoTreinador *treinador) {
     printf("              MISSAO CONCLUIDA            \n");
     printf("========================================\n");
 }
-
-/*
-========================================
-Todos Pokemons foram resgatados
-========================================
-Ambos treinadores retornam ao Centro de Pesquisa.
-Treinador(a) Rosa devolve os Pokémon.
-Treinador(a) Nate devolve os Pokémon.
-========================================
-MISSÃO CONCLUÍDA
-========================================
-*/

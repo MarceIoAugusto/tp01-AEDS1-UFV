@@ -17,13 +17,13 @@ int RemovePokemon(PokeLista *Lista, TipoPokemon *pokemon) { /* Remove o Primeiro
     PokeCelula *Auxiliar;
     if (Lista->Primeiro->Proximo == NULL) {
         printf("\nErro Lista Vazia.");
-        return -1; /*Padrão adotado de retorno de erro = -1*/
+        return 1; /*Padrão adotado de retorno de erro = -1*/
     }
     Auxiliar = Lista->Primeiro->Proximo->Proximo;
     *pokemon = Lista->Primeiro->Proximo->Pokemon;
     free(Lista->Primeiro->Proximo);
     Lista->Primeiro->Proximo = Auxiliar;
-    return 1;
+    return 0;
 }
 
 int BuscaPokemon(PokeLista *Lista, int id, TipoPokemon *pokemon) { /* Busca o Pokemon na lista pelo ID e o retorna com parametro de saida */

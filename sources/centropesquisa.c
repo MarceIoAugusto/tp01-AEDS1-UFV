@@ -7,7 +7,7 @@
 #include <time.h>
 
 void InicializarCP(CentroPesquisa *Pokecenter) {
-    //Inicializa as duas listas as de pokemons recuperados e de pokemons fugitivos
+    // Inicializa as duas listas as de pokemons recuperados e de pokemons fugitivos
     InicializaLista(&Pokecenter->poke_recuperados);
     InicializaLista(&Pokecenter->poke_fugitivos);
     return;
@@ -17,10 +17,11 @@ void InsercaoPokemonFugitivo(TipoPokemon *pokefugitivo, CentroPesquisa *PokeCent
     InserePokemon(&PokeCenter->poke_fugitivos, pokefugitivo);
     return;
 }
-void RemoverPokemonFugitivo(TipoPokemon *pokemon, CentroPesquisa *PokeCenter) {
+void RemoverPokemonFugitivo(CentroPesquisa *PokeCenter) {
     // Remove o exato pokemon da lista de fugitivos
-    int IdFugitivo = getPokeId(pokemon);
-    RemovePokemon(&PokeCenter->poke_fugitivos, IdFugitivo);
+    TipoPokemon pokemon_recuperado;
+    RemovePokemon(&PokeCenter->poke_fugitivos, &pokemon_recuperado);
+    return;
 }
 void ImprimePokemonsFugitivo(CentroPesquisa *Pokecenter) {
     // Imprime todos os pokemons fugitivos

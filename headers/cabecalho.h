@@ -9,5 +9,6 @@
 #define TAM_NOMEP 15 // O tamanho maximo de nome para pokemon usa 12 caracteres
 #define TAM_TIPO 15  // O tamanho maximo de caracteres no tipo é 9
 #define NUM_TREINADORES 2
+#define ERRO -1
 
 #endif

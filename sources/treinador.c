@@ -85,6 +85,7 @@ int Movimentacao(TipoPokemon *pokemon, TipoTreinador *treinador) {
         treinador[i].distancia = distancia[i];
     }
     int menor_indice = 0;
+
     // Verifica qual Treinador esta mais proximo do pokemon e retorna seu indice
     for (int i = 1; i < NUM_TREINADORES; i++) {
         if (treinador[i].distancia < treinador[menor_indice].distancia) {
@@ -99,16 +100,14 @@ void CapturaPokemon(TipoPokemon *pokemon, TipoTreinador *treinador, int indice) 
     // Inserindo o pokemon capturado na lista do Treinador
     InserePokemon(&treinador[indice].pokelista, pokemon);
 }
-TipoPokemon RemoverPokemonTreinador(TipoTreinador *treinador) {
-    TipoPokemon PokemonRetirado;
-
+int RemoverPokemonTreinador(TipoTreinador *treinador, TipoPokemon *PokemonRetirado) {
     // Remove um pokemon da lista do treinador, retornando o pokemon removido da funçao
-    RemovePokemon(&treinador->pokelista, &PokemonRetirado);
-
-    // Apenas verifica se houve um pokemon retirado
-    if (getPokeId(&PokemonRetirado) == NULL || getPokeId(&PokemonRetirado) < 0)
-        setPokeId(&PokemonRetirado, -1);
-    return PokemonRetirado;
+    if (RemovePokemon(&treinador->pokelista, &PokemonRetirado)) {
+        // A lista ainda nao está vazia (return 0)
+        return 0;
+    }
+    // A lista ja está vazia (return 1)
+    return 1;
 }
 void ImprimeTreinador(TipoTreinador treinador) {
     printf("\nO Treinador %s esta na posicao: (%.0f %.0f) | Pokebolas: %d\n", treinador.nome, treinador.pos[X], treinador.pos[Y], treinador.pokebolas);
