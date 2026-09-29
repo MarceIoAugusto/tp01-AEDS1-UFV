@@ -31,8 +31,8 @@ int getPokeNome(TipoPokemon *pokemon, char *nomesaida) {
 }
 
 int getPokeTipo(TipoPokemon *pokemon, char *tiposaida) {
-    if (pokemon->Tipo[9] == '/0') {
-        for (int i = 0; i < 10; i++) {
+    if (pokemon->Tipo[TAM_TIPO - 1] == '/0') {
+        for (int i = 0; i < TAM_TIPO; i++) {
             tiposaida[i] = pokemon->Tipo[i];
         }
     } else {
@@ -96,8 +96,8 @@ int InicializaPokemon(TipoPokemon *pokemon, int identrada, int numeroentrada, ch
 }
 
 int ImprimePokemon(TipoPokemon *pokemon) {
-    char PrintNome[13];
-    char PrintTipo[10];
+    char PrintNome[TAM_NOMEP];
+    char PrintTipo[TAM_TIPO];
     int x, y;
     getPokeNome(pokemon, &PrintNome);
     getPokeTipo(pokemon, &PrintTipo);
@@ -105,7 +105,7 @@ int ImprimePokemon(TipoPokemon *pokemon) {
     printf("\n########## Imprimindo informacoes do Pokemon ##########\n");
     printf("\nId: %d", getPokeId(pokemon));
     printf("\nNome: ");
-    for (int i = 0; i < 13; i++) {
+    for (int i = 0; i < TAM_NOMEP; i++) {
         if (PrintNome[i] != '\0') {
             printf("%c", PrintNome[i]);
         } else {
@@ -114,7 +114,7 @@ int ImprimePokemon(TipoPokemon *pokemon) {
     }
     printf("\nNumero na Pokedex: %d", getPokeNumero(pokemon));
     printf("\nTipo: ");
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < TAM_TIPO; i++) {
         if (PrintTipo[i] != '\0') {
             printf("%c", PrintTipo[i]);
         } else {

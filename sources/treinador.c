@@ -43,9 +43,8 @@ void InicializaTreinador(TipoTreinador *treinador, int ID, char nomeTemp[50], in
     InicializaLista(&treinador->pokelista);
     return;
 }
-
 int leTreinador(FILE *arqtreinador, TipoTreinador *treinador, int id) {
-    char nome[50];
+    char nome[TAM_NOMET];
     int pokebolas;
     if (fscanf(arqtreinador, "%s %d", nome, &pokebolas) == 2) {
         InicializaTreinador(treinador, id, nome, pokebolas);
@@ -53,7 +52,6 @@ int leTreinador(FILE *arqtreinador, TipoTreinador *treinador, int id) {
     }
     return -1;
 }
-
 int Movimentacao(TipoPokemon *pokemon, TipoTreinador *treinador) {
     float distancia[2];
     float resX = 0;
@@ -83,6 +81,8 @@ int Movimentacao(TipoPokemon *pokemon, TipoTreinador *treinador) {
         resY = resY * resY;
 
         distancia[i] = sqrt(resX + resY);
+
+        treinador[i].distancia = distancia[i];
     }
     // Verifica qual Treinador esta mais proximo do pokemon e retorna seu indice
     if (distancia[0] <= distancia[1]) {
@@ -95,8 +95,7 @@ int Movimentacao(TipoPokemon *pokemon, TipoTreinador *treinador) {
         return 1;
     }
 }
-
-void CapturaPokemon(TipoPokemon *pokemon, TipoTreinador *treinador, int indice) {
+int CapturaPokemon(TipoPokemon *pokemon, TipoTreinador *treinador, int indice) {
     // Verifica se o treinador tem pokebola suficiente
     if (treinador[indice].pokebolas > 0) {
         char nomepokemon[TAM_NOMET];
@@ -109,16 +108,15 @@ void CapturaPokemon(TipoPokemon *pokemon, TipoTreinador *treinador, int indice) 
 
         // Inserindo o pokemon capturado na lista do Treinador
         InserePokemon(&treinador[indice].pokelista, pokemon);
-        printf("O Treinador %s capturou o pokemon %s, agora ele tem %d pokebolas\n", treinador[indice].nome, nomepokemon, treinador[indice].pokebolas);
+        return 1;
     }
     // Treinador nao tem pokebola suficiente, retornando ele para o centro de pesquisa
     else {
-        printf("O Treinador %s nao tem pokebolas suficientes\n", treinador[indice]);
         treinador[indice].pos[X] = 0;
         treinador[indice].pos[Y] = 0;
+        return 0;
     }
 }
-
 TipoPokemon RemoverPokemonTreinador(TipoTreinador *treinador) {
     TipoPokemon PokemonRetirado;
 
@@ -153,4 +151,10 @@ void setTreinadorPos(TipoTreinador *treinador, double pos[2]) {
 void setTreinadorPokebolas(TipoTreinador *treinador, int pokebolas) {
     treinador->pokebolas = treinador->pokebolas + pokebolas;
     return;
+}
+double getTreinadorDistancia(TipoTreinador *treinador) {
+    return treinador->distancia;
+}
+int getTreinadorPokebolas(TipoTreinador *treinador) {
+    return treinador->pokebolas;
 }
