@@ -105,7 +105,7 @@ int RemoverPokemonTreinador(TipoTreinador *treinador, TipoPokemon *PokemonRetira
     if (RemovePokemon(&treinador->pokelista, &PokemonRetirado)) {
         // A lista ainda nao está vazia (return 0)
         return 0;
-    }
+
     // A lista ja está vazia (return 1)
     return 1;
 }

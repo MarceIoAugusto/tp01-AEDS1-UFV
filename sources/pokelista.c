@@ -17,12 +17,15 @@ int RemovePokemon(PokeLista *Lista, TipoPokemon *pokemon) { /* Remove o Primeiro
     PokeCelula *Auxiliar;
     if (Lista->Primeiro->Proximo == NULL) {
         printf("\nErro Lista Vazia.");
-        return 1; /*Padrão adotado de retorno de erro = -1*/
+        // avisa se foi o ultimo
+        return 1;
     }
+
     Auxiliar = Lista->Primeiro->Proximo->Proximo;
     *pokemon = Lista->Primeiro->Proximo->Pokemon;
     free(Lista->Primeiro->Proximo);
     Lista->Primeiro->Proximo = Auxiliar;
+
     return 0;
 }
 
@@ -49,4 +52,10 @@ void ImprimeLista(PokeLista *Lista) {
     while (curr->Proximo) {
         return;
     }
+}
+int ListaEVazia(PokeLista *Lista) {
+    if (Lista->Primeiro->Proximo == NULL) {
+        return 1;
+    } else
+        return 0;
 }

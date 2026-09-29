@@ -17,11 +17,10 @@ void InsercaoPokemonFugitivo(TipoPokemon *pokefugitivo, CentroPesquisa *PokeCent
     InserePokemon(&PokeCenter->poke_fugitivos, pokefugitivo);
     return;
 }
-void RemoverPokemonFugitivo(CentroPesquisa *PokeCenter) {
+int RemoverPokemonFugitivo(CentroPesquisa *PokeCenter) {
     // Remove o exato pokemon da lista de fugitivos
     TipoPokemon pokemon_recuperado;
-    RemovePokemon(&PokeCenter->poke_fugitivos, &pokemon_recuperado);
-    return;
+    return RemovePokemon(&PokeCenter->poke_fugitivos, &pokemon_recuperado);
 }
 void ImprimePokemonsFugitivo(CentroPesquisa *Pokecenter) {
     // Imprime todos os pokemons fugitivos
