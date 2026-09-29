@@ -15,3 +15,7 @@ void RemoverPokemonFugitivo(TipoPokemon *pokemon, CentroPesquisa *PokeCenter) {
     int IdFugitivo = getPokeId(pokemon);
     RemovePokemon(&PokeCenter->poke_fugitivos, IdFugitivo);
 }
+void ImprimePokemonsFugitivo(CentroPesquisa *Pokecenter) {
+    
+    return;
+}
