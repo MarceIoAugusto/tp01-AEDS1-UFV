@@ -14,4 +14,5 @@ void RemoverPokemonFugitivo(TipoPokemon *pokemon, CentroPesquisa *PokeCenter);
 void ImprimePokemonsFugitivo(CentroPesquisa *Pokecenter);
 void InsercaoPokemonRecuperado(TipoPokemon *poke_recuperado, CentroPesquisa *PokeCenter, TipoTreinador *Treinador);
 int RecarregaPokbol(TipoTreinador *Treinador);
+TipoPokemon *setPokemonAlvo(CentroPesquisa *pokecenter);
 #endif

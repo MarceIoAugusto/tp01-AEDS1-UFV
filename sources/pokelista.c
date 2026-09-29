@@ -17,9 +17,9 @@ int RemovePokemon(PokeLista *Lista, TipoPokemon *pokemon) { /* Remove o Primeiro
     PokeCelula *Auxiliar;
     if (Lista->Primeiro->Proximo == NULL) {
         printf("\nErro Lista Vazia.");
-            return -1; /*Padrão adotado de retorno de erro = -1*/
+        return -1; /*Padrão adotado de retorno de erro = -1*/
     }
-    Auxiliar= Lista->Primeiro->Proximo->Proximo;
+    Auxiliar = Lista->Primeiro->Proximo->Proximo;
     *pokemon = Lista->Primeiro->Proximo->Pokemon;
     free(Lista->Primeiro->Proximo);
     Lista->Primeiro->Proximo = Auxiliar;
@@ -29,7 +29,7 @@ int RemovePokemon(PokeLista *Lista, TipoPokemon *pokemon) { /* Remove o Primeiro
 int BuscaPokemon(PokeLista *Lista, int id, TipoPokemon *pokemon) { /* Busca o Pokemon na lista pelo ID e o retorna com parametro de saida */
     PokeCelula *Auxiliar = Lista->Primeiro->Proximo;
     while (Auxiliar != NULL) {
-        if ((Auxiliar->Pokemon.Id) == id) {
+        if ((getPokeId(&Auxiliar->Pokemon)) == id) {
             *pokemon = Auxiliar->Pokemon;
             return 1;
         }
@@ -39,10 +39,8 @@ int BuscaPokemon(PokeLista *Lista, int id, TipoPokemon *pokemon) { /* Busca o Po
     return -1; /*Padrão adotado de retorno de erro = -1*/
 }
 
-
-/*
-PokeLista *getPrimeiroItem(PokeLista Lista) {
-    return Lista.Primeiro;
+TipoPokemon *getPrimeiroItem(PokeLista Lista) {
+    return &Lista.Primeiro->Pokemon;
 }
 void ImprimeLista(PokeLista *Lista) {
     PokeCelula *curr;

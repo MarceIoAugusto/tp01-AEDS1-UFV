@@ -84,38 +84,20 @@ int Movimentacao(TipoPokemon *pokemon, TipoTreinador *treinador) {
 
         treinador[i].distancia = distancia[i];
     }
+    int menor_indice = 0;
     // Verifica qual Treinador esta mais proximo do pokemon e retorna seu indice
-    if (distancia[0] <= distancia[1]) {
-        treinador[0].pos[X] = pokepos[X];
-        treinador[0].pos[Y] = pokepos[Y];
-        return 0;
-    } else {
-        treinador[1].pos[X] = pokepos[X];
-        treinador[1].pos[Y] = pokepos[Y];
-        return 1;
+    for (int i = 1; i < NUM_TREINADORES; i++) {
+        if (treinador[i].distancia < treinador[menor_indice].distancia) {
+            menor_indice = i;
+        }
     }
+    return menor_indice;
 }
-int CapturaPokemon(TipoPokemon *pokemon, TipoTreinador *treinador, int indice) {
-    // Verifica se o treinador tem pokebola suficiente
-    if (treinador[indice].pokebolas > 0) {
-        char nomepokemon[TAM_NOMET];
-
-        // Pegando o nome do pokemon Alvo
-        getPokeNome(pokemon, nomepokemon);
-
-        // Retirando uma pokebola do Treinador
-        treinador[indice].pokebolas--;
-
-        // Inserindo o pokemon capturado na lista do Treinador
-        InserePokemon(&treinador[indice].pokelista, pokemon);
-        return 1;
-    }
-    // Treinador nao tem pokebola suficiente, retornando ele para o centro de pesquisa
-    else {
-        treinador[indice].pos[X] = 0;
-        treinador[indice].pos[Y] = 0;
-        return 0;
-    }
+void CapturaPokemon(TipoPokemon *pokemon, TipoTreinador *treinador, int indice) {
+    // Retirando uma pokebola do Treinador
+    treinador[indice].pokebolas--;
+    // Inserindo o pokemon capturado na lista do Treinador
+    InserePokemon(&treinador[indice].pokelista, pokemon);
 }
 TipoPokemon RemoverPokemonTreinador(TipoTreinador *treinador) {
     TipoPokemon PokemonRetirado;

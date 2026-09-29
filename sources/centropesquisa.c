@@ -46,3 +46,6 @@ int RecarregaPokbol(TipoTreinador *Treinador) {
 
     return pokbol;
 }
+TipoPokemon *setPokemonAlvo(CentroPesquisa *pokecenter) {
+    return getPrimeiroItem(pokecenter->poke_fugitivos);
+}
