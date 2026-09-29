@@ -69,10 +69,6 @@ void ImprimeLista(PokeLista *Lista) {
     curr = Lista->Primeiro;
 
     while (curr->Proximo) {
-<<<<<<< HEAD
-         
-=======
->>>>>>> 4502fcc78b658804d29c6c3f291a88e03662548b
         return;
     }
 }

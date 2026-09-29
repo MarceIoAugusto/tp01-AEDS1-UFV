@@ -23,11 +23,6 @@ void RemoverPokemonFugitivo(TipoPokemon *pokemon, CentroPesquisa *PokeCenter) {
     RemovePokemon(&PokeCenter->poke_fugitivos, IdFugitivo);
 }
 void ImprimePokemonsFugitivo(CentroPesquisa *Pokecenter) {
-<<<<<<< HEAD
-    
-    return;
-}
-=======
     //Imprime todos os pokemons fugitivos
     ImprimeLista(&Pokecenter->poke_fugitivos);
     return;
@@ -51,4 +46,3 @@ void RecarregaPokbol(TipoTreinador *Treinador){
 
     return;
 }
->>>>>>> 4502fcc78b658804d29c6c3f291a88e03662548b
