@@ -10,7 +10,7 @@
 typedef struct
 {
     int id;
-    char nome[50];
+    char nome[TAM_NOMET];
     double pos[2];
     PokeLista pokelista;
     int pokebolas;

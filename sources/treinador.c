@@ -1,5 +1,5 @@
 #include "treinador.h"
-
+#include "cabecalho.h"
 void InicializaTreinador(TipoTreinador *treinador, int ID, char nomeTemp[50], int pokebolTemp) {
     int caracter = 0;
 
@@ -39,7 +39,7 @@ void InicializaTreinador(TipoTreinador *treinador, int ID, char nomeTemp[50], in
 }
 
 int leTreinador(FILE * arqtreinador,TipoTreinador *treinador,int id){
-    char nome[50];
+    char nome[TAM_NOMET];
     int pokebolas;
     if(fscanf(arqtreinador,"%s %d",nome,&pokebolas) == 2){
         InicializaTreinador(treinador, id, nome, pokebolas);
@@ -62,7 +62,7 @@ int Movimentacao(TipoPokemon *pokemon, TipoTreinador *treinador) {
 
     // calculando a distancia para cada treinador
     for (int i = 0; i < NUM_TREINADORES; i++) {
-        getTreinadorPos(&treinador[i], posT);
+        posT = getTreinadorPos(&treinador[i]);
         // (X1 - X2)
         resX = (posT[X] - pokepos[X]);
 
@@ -129,15 +129,21 @@ void ImprimeTreinador(TipoTreinador treinador) {
 int getTreinadorID(TipoTreinador *treinador) {
     return treinador->id;
 }
-
-int getTreinadorPos(TipoTreinador *treinador, double pos[2] /*<--saida*/) {
+double* getTreinadorPos(TipoTreinador *treinador){
+    double pos[2];
     pos[X] = treinador->pos[X];
     pos[Y] = treinador->pos[Y];
-    return 0;
+    return pos;
 }
-
-int setTreinadorPos(TipoTreinador *treinador, double pos[2] /*<--entrada*/) {
+char* getTreinadorNome(TipoTreinador *treinador){
+    return treinador->nome
+}
+void setTreinadorPos(TipoTreinador *treinador, double pos[2]) {
     treinador->pos[X] = pos[X];
     treinador->pos[Y] = pos[Y];
-    return 0;
+    return;
+}
+void setTreinadorPokebolas(TipoTreinador *treinador,int pokebolas){
+    treinador->pokebolas = treinador->pokebolas + pokebolas;
+    return;
 }

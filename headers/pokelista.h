@@ -19,6 +19,8 @@ void InserePokemon(PokeLista *Lista, TipoPokemon *pokemon); //Insere pokemon no 
 int RemovePokemon(PokeLista *Lista, TipoPokemon *pokemon); 
 int BuscaPokemon(PokeLista *Lista, int id, TipoPokemon *pokemon);
 void ImprimeLista(PokeLista *Lista);
+void ImprimeLista(PokeLista *Lista);
+PokeLista *getPrimeiroItem(PokeLista Lista);
 
 /* void getPrimeiroItem(PokeLista *Lista);
 */

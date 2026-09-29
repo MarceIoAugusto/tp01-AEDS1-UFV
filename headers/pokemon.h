@@ -16,7 +16,7 @@ typedef struct {
 
 }TipoPokemon;
 
-int LePokemon(FILE* arquivo, int numero, TipoPokemon *saida);
+int LePokemon(FILE* arquivo, int id, TipoPokemon *saida);
 int InicializaPokemon(TipoPokemon *pokemon, int identrada, int numeroentrada, char *nomeentrada, char *tipoentrada,float x, float y);
 
 

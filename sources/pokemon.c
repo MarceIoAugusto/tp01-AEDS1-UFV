@@ -73,13 +73,13 @@ void setPokeLocalizacao(TipoPokemon *pokemon, float x, float y){
     return;
 }
 
-int LePokemon(FILE* arquivo, int numero, TipoPokemon *saida){
-    int Id;
+int LePokemon(FILE* arquivo, int id, TipoPokemon *saida){
+    int numero;
     char Nome [TAM_NOMEP];
     char Tipo [TAM_TIPO];
     float x, y;
-    if (fscanf(arquivo,"%d %12s %9s %f %f",&Id,Nome,Tipo,&x,&y) == 5){
-        InicializaPokemon( saida, Id, numero, Nome, Tipo, x, y);
+    if (fscanf(arquivo,"%d %12s %9s %f %f",&numero,Nome,Tipo,&x,&y) == 5){
+        InicializaPokemon( saida, id, numero, Nome, Tipo, x, y);
         return 1;
     }
     else{
