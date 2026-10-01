@@ -1,12 +1,6 @@
 #include "treinador.h"
-#include "cabecalho.h"
-#include "pokelista.h"
-#include "pokemon.h"
-#include <math.h>
-#include <stdio.h>
-#include <stdlib.h>
 
-void InicializaTreinador(TipoTreinador *treinador, int ID, char nomeTemp[50], int pokebolTemp) {
+void InicializaTreinador(TipoTreinador *treinador, int ID, char *nomeTemp, int pokebolTemp) {
     int caracter = 0;
 
     // Erros
@@ -17,8 +11,7 @@ void InicializaTreinador(TipoTreinador *treinador, int ID, char nomeTemp[50], in
         printf("\nErro ao inicializar o treinador... Nome vazio\n");
         exit(EXIT_FAILURE);
     } else if (pokebolTemp < 0) {
-        printf(
-            "\nErro ao inicializar o treinador... pokebolas iniciais negativas\n");
+        printf("\nErro ao inicializar o treinador... pokebolas iniciais negativas\n");
         exit(EXIT_FAILURE);
     }
 
@@ -39,10 +32,13 @@ void InicializaTreinador(TipoTreinador *treinador, int ID, char nomeTemp[50], in
     treinador->pos[X] = 0;
     treinador->pos[Y] = 0;
 
+    treinador->distancia = 0;
+
     // inicializando a pokelista de cada treinador
     InicializaLista(&treinador->pokelista);
     return;
 }
+
 int leTreinador(FILE *arqtreinador, TipoTreinador *treinador, int id) {
     char nome[TAM_NOMET];
     int pokebolas;
@@ -50,101 +46,105 @@ int leTreinador(FILE *arqtreinador, TipoTreinador *treinador, int id) {
         InicializaTreinador(treinador, id, nome, pokebolas);
         return 1;
     }
-    return -1;
+    return ERRO;
 }
-int Movimentacao(TipoPokemon *pokemon, TipoTreinador *treinador) {
-    float distancia[2];
-    float resX = 0;
-    float resY = 0;
 
-    // posicao do treinador
-    float posT[2];
+// Calcula a distancia de cada treinador ate o pokemon, move o mais proximo ate ele
+// e retorna o indice desse treinador que se moveu
+int Movimentacao(TipoPokemon *pokemon, TipoTreinador *treinador) {
+    float resX, resY;
 
     // Pegando as posicoes do pokemon alvo
-    float pokepos[2];
+    float pokepos[COORDENADAS];
     getPokeLocalizacao(pokemon, &pokepos[X], &pokepos[Y]);
 
     // calculando a distancia para cada treinador
     for (int i = 0; i < NUM_TREINADORES; i++) {
-        posT[X] = treinador[i].pos[X];
-        posT[Y] = treinador[i].pos[Y];
-        // (X1 - X2)
-        resX = (posT[X] - pokepos[X]);
+        resX = treinador[i].pos[X] - pokepos[X]; // (X1 - X2)
+        resX = resX * resX;                      // (resultado)**2
+        resY = treinador[i].pos[Y] - pokepos[Y]; // (Y1 - Y2)
+        resY = resY * resY;                      // (resultado)**2
 
-        //(resultado)**2
-        resX = resX * resX;
-
-        // (Y1 - Y2)
-        resY = (posT[Y] - pokepos[Y]);
-
-        //(resultado)**2
-        resY = resY * resY;
-
-        distancia[i] = sqrt(resX + resY);
-
-        treinador[i].distancia = distancia[i];
+        treinador[i].distancia = sqrt(resX + resY);
     }
-    int menor_indice = 0;
 
     // Verifica qual Treinador esta mais proximo do pokemon e retorna seu indice
+    // Usa-se < e nao <= pois se os treinadores tiverem a mesma distancia do pokemon o primeiro sera escolhido
+    int menor_indice = 0;
     for (int i = 1; i < NUM_TREINADORES; i++) {
         if (treinador[i].distancia < treinador[menor_indice].distancia) {
             menor_indice = i;
         }
     }
+
+    // Movimenta o treinador escolhido ate o pokemon
+    treinador[menor_indice].pos[X] = pokepos[X];
+    treinador[menor_indice].pos[Y] = pokepos[Y];
     return menor_indice;
 }
-int CapturaPokemon(TipoPokemon *pokemon, TipoTreinador *treinador, int indice) {
+
+// Captura o pokemon e retorna 1 se as pokebolas do treinador acabaram
+int CapturaPokemon(TipoPokemon *alvo, TipoTreinador *treinador, int indice) {
+
     // Retirando uma pokebola do Treinador
     treinador[indice].pokebolas--;
+
+    // Insere o pokemon na "mochila" do Treinador
+    InserePokemon(&treinador[indice].pokelista, alvo);
+
     // Verifica se as pokebolas do treinador acabaram
     if (treinador[indice].pokebolas <= 0) {
         return 1;
     }
-    //  Inserindo o pokemon capturado na lista do Treinador
-    InserePokemon(&treinador[indice].pokelista, pokemon);
     return 0;
 }
+
 int RemoverPokemonTreinador(TipoTreinador *treinador, TipoPokemon *PokemonRetirado) {
     // Remove um pokemon da lista do treinador, retornando o pokemon removido da funçao
-    if (RemovePokemon(&treinador->pokelista, &PokemonRetirado)) {
-
-        // A lista ainda nao está vazia (return 0)
-        return 0;
+    if (RemovePokemon(&treinador->pokelista, PokemonRetirado)) {
+        // Conseguiu remover (return 1)
+        return 1;
     }
-    // A lista ja está vazia (return 1)
-    return 1;
+    // A lista ja estava vazia (return 0)
+    return 0;
 }
+
 void ImprimeTreinador(TipoTreinador treinador) {
     printf("\nO Treinador %s esta na posicao: (%.0f %.0f) | Pokebolas: %d\n", treinador.nome, treinador.pos[X], treinador.pos[Y], treinador.pokebolas);
 }
+
 int getTreinadorID(TipoTreinador *treinador) {
     return treinador->id;
 }
+
+// Agora retorna o array pos que ja esta dentro do treinador.
 double *getTreinadorPos(TipoTreinador *treinador) {
-    double pos[2];
-    pos[X] = treinador->pos[X];
-    pos[Y] = treinador->pos[Y];
-    return pos;
+    return treinador->pos;
 }
+
 char *getTreinadorNome(TipoTreinador *treinador) {
     return treinador->nome;
 }
-void setTreinadorPos(TipoTreinador *treinador, double pos[2]) {
+
+void setTreinadorPos(TipoTreinador *treinador, double *pos) {
     treinador->pos[X] = pos[X];
     treinador->pos[Y] = pos[Y];
     return;
 }
+
 void setTreinadorPokebolas(TipoTreinador *treinador, int pokebolas) {
     treinador->pokebolas = treinador->pokebolas + pokebolas;
     return;
 }
+
 double getTreinadorDistancia(TipoTreinador *treinador) {
     return treinador->distancia;
 }
+
 int getTreinadorPokebolas(TipoTreinador *treinador) {
     return treinador->pokebolas;
 }
+
 void RetornoTreinadorCP(TipoTreinador *treinador) {
     treinador->pos[X] = 0;
     treinador->pos[Y] = 0;

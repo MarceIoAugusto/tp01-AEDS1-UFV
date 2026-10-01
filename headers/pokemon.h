@@ -6,17 +6,16 @@
 #include <string.h>
 
 typedef struct {
-    int Id;
-    int Numero;
-    char Nome[TAM_NOMEP];           /* O maior nome de pokemon possui 12 caracteres*/
-    char Tipo[TAM_TIPO];            /* O tipo de pokemon com maior quantidade de caracteres eh o TERRESTRE com 9 caracteres */
+    int Id;                         /* Identificador unico do pokemon */
+    int Numero;                     /* Numero na pokedex */
+    char Nome[TAM_NOMEP];           
+    char Tipo[TAM_TIPO];           
     float Localizacao[COORDENADAS]; /* Dois numeros de ponto flutuante que registram a localização X e Y */
 
 } TipoPokemon;
 
-int LePokemon(FILE* arquivo, int id, TipoPokemon *saida);
-int InicializaPokemon(TipoPokemon *pokemon, int identrada, int numeroentrada, char *nomeentrada, char *tipoentrada,float x, float y);
-
+int LePokemon(FILE *arquivo, int id, TipoPokemon *saida);
+int InicializaPokemon(TipoPokemon *pokemon, int identrada, int numeroentrada, char *nomeentrada, char *tipoentrada, float x, float y);
 
 int getPokeId(TipoPokemon *pokemon);
 int getPokeNumero(TipoPokemon *pokemon);
@@ -32,4 +31,4 @@ void setPokeLocalizacao(TipoPokemon *pokemon, float x, float y);
 
 int ImprimePokemon(TipoPokemon *pokemon);
 
-#endif;
+#endif

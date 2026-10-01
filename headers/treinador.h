@@ -11,17 +11,17 @@ typedef struct
 {
     int id;
     char nome[TAM_NOMET];
-    double pos[2];
+    double pos[COORDENADAS];
     PokeLista pokelista;
     int pokebolas;
     double distancia;
 
 } TipoTreinador;
 
-void inicializaTreinador(TipoTreinador *treinador, int ID, char *nomeTemp, int pokebolTemp);
+void InicializaTreinador(TipoTreinador *treinador, int ID, char *nomeTemp, int pokebolTemp);
 int leTreinador(FILE *arqtreinador, TipoTreinador *treinador, int id);
-void Movimentacao(TipoPokemon *pokemon, TipoTreinador *treinador, int alvo);
-int CapturaPokemon(TipoPokemon *pokemon, TipoTreinador *treinador, int indice);
+int Movimentacao(TipoPokemon *pokemon, TipoTreinador *treinador);
+int CapturaPokemon(TipoPokemon *alvo, TipoTreinador *treinador, int indice);
 int RemoverPokemonTreinador(TipoTreinador *treinador, TipoPokemon *PokemonRetirado);
 void ImprimeTreinador(TipoTreinador treinador);
 void RetornoTreinadorCP(TipoTreinador *treinador);

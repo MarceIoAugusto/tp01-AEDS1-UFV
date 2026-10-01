@@ -2,17 +2,22 @@
 #define CENTROPESQUISA_H
 
 #include "pokelista.h"
+#include "treinador.h" 
 
 typedef struct {
     PokeLista poke_fugitivos;
     PokeLista poke_recuperados;
 } CentroPesquisa;
 
-void Inicializar(CentroPesquisa *Pokecenter);
-void InsercaoPokemonFugitivo(TipoPokemon *PokeFugitivo, CentroPesquisa *PokeCenter);
-void RemoverPokemonFugitivo(TipoPokemon *pokemon, CentroPesquisa *PokeCenter);
+void InicializarCP(CentroPesquisa *Pokecenter);
+void InsercaoPokemonFugitivo(TipoPokemon *pokefugitivo, CentroPesquisa *PokeCenter);
+int RemoverPokemonFugitivo(CentroPesquisa *PokeCenter);
 void ImprimePokemonsFugitivo(CentroPesquisa *Pokecenter);
 void InsercaoPokemonRecuperado(TipoPokemon *poke_recuperado, CentroPesquisa *PokeCenter);
 int RecarregaPokbol(TipoTreinador *Treinador);
 TipoPokemon *setPokemonAlvo(CentroPesquisa *pokecenter);
+PokeLista *getListaCPFugitivos(CentroPesquisa *pokecenter); // CORRECAO: veio do pokelista.h
+void GeraRelatorio(CentroPesquisa *PokeCenter, char *nomearquivo);
+void LiberaCP(CentroPesquisa *PokeCenter);
+
 #endif

@@ -1,5 +1,5 @@
-#ifndef TREINADOR_H
-#define TREINADOR_H
+#ifndef SAIDA_H
+#define SAIDA_H
 
 #include "centropesquisa.h"
 #include "pokelista.h"
@@ -8,14 +8,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void ImprimeInicioMissao(TipoTreinador *treinador);
-/*
-========================================
-            INiCIO DA MISSAO
-========================================
-Treinador(a) Rosa: posicao (0,0) | Pokebolas: 2
-Treinador(a) Nate: posicao (0,0) | Pokebolas: 2
-Pokemons fugitivos a serem resgatados: 5
-*/
+void ImprimeInicioMissao(TipoTreinador *treinador, int numero_fugitivos);
+void ImprimeAlvo(TipoTreinador *treinador, TipoPokemon *pokemon, int indice_treinador);
+void ImprimeRetornoPC(TipoTreinador *treinador, int pokebolas_ganhas);
+void ConclusaoDaMissao(TipoTreinador *treinador);
 
 #endif

@@ -10,18 +10,16 @@ typedef struct PokeCelula {
 } PokeCelula;
 
 typedef struct {
-    PokeCelula *Primeiro, *Ultimo;
+    PokeCelula *Primeiro, *Ultimo; //Celula cabeça
 } PokeLista;
 
-void InicializaLista(PokeLista *Lista);                     // Faz a inicializacao da lista
-void InserePokemon(PokeLista *Lista, TipoPokemon *pokemon); // Insere pokemon no final da lista
-int RemovePokemon(PokeLista *Lista, TipoPokemon *pokemon);
+void InicializaLista(PokeLista *Lista);  
+void InserePokemon(PokeLista *Lista, TipoPokemon *pokemon); 
+int RemovePokemon(PokeLista *Lista, TipoPokemon *pokemon);  
 int BuscaPokemon(PokeLista *Lista, int id, TipoPokemon *pokemon);
 void ImprimeLista(PokeLista *Lista);
 TipoPokemon *getPrimeiroItem(PokeLista Lista);
 int ListaEVazia(PokeLista *Lista);
-PokeLista *getListaCPFugitivos(CentroPesquisa *pokecenter);
+void LiberaLista(PokeLista *Lista);
 
-/* void getPrimeiroItem(PokeLista *Lista);
- */
 #endif

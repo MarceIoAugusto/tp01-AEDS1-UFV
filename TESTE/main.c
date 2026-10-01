@@ -1,72 +1,147 @@
 #include "cabecalho.h"
 #include "centropesquisa.h"
 #include "pokelista.h"
+#include "saida.h"
 #include "treinador.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
-void RegistraInformacoes(FILE *arquivo, CentroPesquisa *CPentrada, TipoTreinador *treinadorentrada, int *npokemons) {
+// Le os treinadores e os pokemons do arquivo
+void RegistraInformacoes(FILE *arquivo, CentroPesquisa *CPentrada,
+                         TipoTreinador *treinadorentrada, int *npokemons) {
+
     int POKEBOLAS;
     int cont = 0;
     char nomet[TAM_NOMET];
     TipoPokemon pokemonentrada;
 
-    // inicializa CP
     InicializarCP(CPentrada);
 
-    // Inicializa Treinadores <ja insere seus dados
-    for (int i = 1; i < 3; i++) {
+    // Le e inicializa os dados dos treinadores
+    for (int i = 0; i < NUM_TREINADORES; i++) {
         fscanf(arquivo, "%s %d", nomet, &POKEBOLAS);
-        InicializaTreinador(treinadorentrada[i], i, nomet, POKEBOLAS);
+        InicializaTreinador(&treinadorentrada[i], i + 1, nomet, POKEBOLAS);
     }
 
     // Le a quantidade de pokemons
-    fscanf(arquivo, "%d", *npokemons);
+    fscanf(arquivo, "%d", npokemons);
 
-    // Le os pokemons do arquivo e insere na lista de fugitivos
-    while (LePokemon(arquivo, cont, &pokemonentrada) != EOF) {
-        InsercaoPokemonFugitivo(&pokemonentrada, CPentrada);
+    // Coloca os pokemons na lista de fugitivos
+    for (cont = 0; cont < *npokemons; cont++) {
+        if (LePokemon(arquivo, cont, &pokemonentrada) == 1) {
+            InsercaoPokemonFugitivo(&pokemonentrada, CPentrada);
+        }
     }
+}
+
+// Devolve ao centro os pokemons carregados pelo treinador
+void DevolvePokemons(CentroPesquisa *centro, TipoTreinador *treinador) {
+
+    TipoPokemon pokemon_retirado;
+
+    while (RemoverPokemonTreinador(treinador, &pokemon_retirado)) {
+        InsercaoPokemonRecuperado(&pokemon_retirado, centro);
+    }
+}
+
+// Faz o treinador voltar ao centro e recarregar as pokebolas
+void RetornaERecarrega(CentroPesquisa *centro, TipoTreinador *treinador) {
+
+    int ganhas;
+
+    RetornoTreinadorCP(treinador);
+    DevolvePokemons(centro, treinador);
+
+    ganhas = RecarregaPokbol(treinador);
+    ImprimeRetornoPC(treinador, ganhas);
 }
 
 int main() {
 
-    // INICIALIZACAO
-    int Npokemons;
-    CentroPesquisa Centro_de_Pesquisa;
+    int num_pokemons = 0;
+    char nomeArquivo[TAM_ARQUIVO];
+
+    // Centro de Pesquisa
+    CentroPesquisa Pokecenter;
+
+    // Vetor dos treinadores
     TipoTreinador Treinador[NUM_TREINADORES];
 
-    // Leitura do arquivo
-    FILE *teste = fopen("teste.txt", "r");
+    srand(time(NULL));
 
-    // REGISTRO DE INFORMACOES
-    RegistraInformacoes(teste, &Centro_de_Pesquisa, Treinador, &Npokemons);
+    system("cls");
 
-    fclose(teste);
+    printf("Digite o nome do arquivo de entrada: ");
+    scanf("%s", nomeArquivo);
 
-    // Missao de capruta
+    // Abre o arquivo de entrada
+    FILE *entrada = fopen(nomeArquivo, "r");
 
-    // recebendo pokemon alvo
-    TipoPokemon *Alvo = setPokemonAlvo(&Centro_de_Pesquisa);
-    // Capturando o Pokemon alvo e ja verificando se as pokebolas acabaram
-    int indice_treinador = Movimentacao(Alvo, Treinador);
-    if (capturaPokemon(Alvo, Treinador, Movimentacao(Alvo, Treinador))) {
-        RetornoTreinadorCP(&Treinador[])
+    if (entrada == NULL) {
+        printf("Erro: nao foi possivel abrir o arquivo %s\n", nomeArquivo);
+        return 1;
     }
 
-    // Atualizacao listagem de fugas
-    removerPokemonFugitivo(&Centro_de_Pesquisa);
-    // O if verifica se a lista de fugitivos do centro de pesquisa acabou
-    if (ListaEVazia(getListaCPFugitivos(&Centro_de_Pesquisa))) {
-        for (int i = 0; i < NUM_TREINADORES; i++) {
-            RetornoTreinadorCP(&Treinador[i]);
-            TipoPokemon *pokemon_retirado;
-            while (RemoverPokemonTreinador(&Treinador[i], pokemon_retirado)) {
-                InsercaoPokemonRecuperado(pokemon_retirado, &Centro_de_Pesquisa);
-            }
+    RegistraInformacoes(entrada, &Pokecenter,
+                        Treinador, &num_pokemons);
+
+    fclose(entrada);
+
+    printf("\n");
+    ImprimeInicioMissao(Treinador, num_pokemons);
+
+    // Recarrega os treinadores que iniciam sem pokebolas
+    for (int i = 0; i < NUM_TREINADORES; i++) {
+        if (getTreinadorPokebolas(&Treinador[i]) == 0) {
+            RetornaERecarrega(&Pokecenter, &Treinador[i]);
         }
     }
-    //
+
+    // Missao de captura
+    while (!ListaEVazia(getListaCPFugitivos(&Pokecenter))) {
+
+        TipoPokemon *Alvo = setPokemonAlvo(&Pokecenter);
+
+        int indice_treinador = Movimentacao(Alvo, Treinador);
+
+        int acabaram_pokebolas =
+            CapturaPokemon(Alvo, Treinador, indice_treinador);
+
+        ImprimeAlvo(Treinador, Alvo, indice_treinador);
+
+        RemoverPokemonFugitivo(&Pokecenter);
+
+        if (ListaEVazia(getListaCPFugitivos(&Pokecenter))) {
+            break;
+        }
+
+        if (acabaram_pokebolas) {
+            RetornaERecarrega(
+                &Pokecenter,
+                &Treinador[indice_treinador]
+            );
+        }
+    }
+
+    // Retorno dos treinadores ao final da missao
+    for (int i = 0; i < NUM_TREINADORES; i++) {
+        RetornoTreinadorCP(&Treinador[i]);
+        DevolvePokemons(&Pokecenter, &Treinador[i]);
+    }
+
+    ConclusaoDaMissao(Treinador);
+
+    // Gera o relatorio
+    GeraRelatorio(&Pokecenter, NOME_RELATORIO);
+    printf("Relatorio gerado em %s\n", NOME_RELATORIO);
+
+    // Libera a memoria
+    for (int i = 0; i < NUM_TREINADORES; i++) {
+        LiberaLista(&Treinador[i].pokelista);
+    }
+
+    LiberaCP(&Pokecenter);
 
     return 0;
 }

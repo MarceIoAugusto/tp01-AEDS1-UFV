@@ -1,10 +1,4 @@
 #include "centropesquisa.h"
-#include "pokelista.h"
-#include "pokemon.h"
-#include "treinador.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
 
 void InicializarCP(CentroPesquisa *Pokecenter) {
     // Inicializa as duas listas as de pokemons recuperados e de pokemons fugitivos
@@ -18,7 +12,7 @@ void InsercaoPokemonFugitivo(TipoPokemon *pokefugitivo, CentroPesquisa *PokeCent
     return;
 }
 int RemoverPokemonFugitivo(CentroPesquisa *PokeCenter) {
-    // Remove o exato pokemon da lista de fugitivos
+    // Remove o primeiro pokemon da lista de fugitivos (que e sempre o pokemon alvo capturado)
     TipoPokemon pokemon_recuperado;
     return RemovePokemon(&PokeCenter->poke_fugitivos, &pokemon_recuperado);
 }
@@ -34,21 +28,45 @@ void InsercaoPokemonRecuperado(TipoPokemon *poke_recuperado, CentroPesquisa *Pok
 }
 int RecarregaPokbol(TipoTreinador *Treinador) {
     int pokbol;
-    pokbol = 0;
-    // Inicializa a semente com o tempo atual
-    srand(time(NULL));
 
-    // Gera um numero aleatorio entre 1 e 20
-    pokbol = (rand() % 20) + 1;
+    // Gera um numero aleatorio entre 1 e MAX_POKEBOLAS
+    pokbol = (rand() % MAX_POKEBOLAS) + 1;
 
     // Recarrega as pokebolas do treinador
     setTreinadorPokebolas(Treinador, pokbol);
 
-    return pokbol;
+    return pokbol; // Retorna quantas pokebolas ele recebeu
 }
 TipoPokemon *setPokemonAlvo(CentroPesquisa *pokecenter) {
     return getPrimeiroItem(pokecenter->poke_fugitivos);
 }
 PokeLista *getListaCPFugitivos(CentroPesquisa *pokecenter) {
     return &pokecenter->poke_fugitivos;
+}
+//Cria o relatorio com os pokemons recuperados
+void GeraRelatorio(CentroPesquisa *PokeCenter, char *nomearquivo) {
+    
+    char nome[TAM_NOMEP];
+    FILE *relatorio = fopen(nomearquivo, "w");
+    if (relatorio == NULL) {
+        printf("Erro ao criar o relatorio.\n");
+        return;
+    }
+
+    fprintf(relatorio, "Pokemon recuperados:\n");
+
+    // Percorre a lista de recuperados (pulando a celula cabeca)
+    PokeCelula *atual = PokeCenter->poke_recuperados.Primeiro->Proximo;
+    while (atual != NULL) {
+        getPokeNome(&atual->Pokemon, nome);
+        fprintf(relatorio, "%03d %s\n", getPokeNumero(&atual->Pokemon), nome);
+        atual = atual->Proximo;
+    }
+
+    fclose(relatorio);
+}
+// libera a memoria das duas listas
+void LiberaCP(CentroPesquisa *PokeCenter) {
+    LiberaLista(&PokeCenter->poke_fugitivos);
+    LiberaLista(&PokeCenter->poke_recuperados);
 }
