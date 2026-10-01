@@ -16,7 +16,7 @@ void ImprimePokemonsFugitivo(CentroPesquisa *Pokecenter);
 void InsercaoPokemonRecuperado(TipoPokemon *poke_recuperado, CentroPesquisa *PokeCenter);
 int RecarregaPokbol(TipoTreinador *Treinador);
 TipoPokemon *setPokemonAlvo(CentroPesquisa *pokecenter);
-PokeLista *getListaCPFugitivos(CentroPesquisa *pokecenter); // CORRECAO: veio do pokelista.h
+PokeLista *getListaCPFugitivos(CentroPesquisa *pokecenter);
 void GeraRelatorio(CentroPesquisa *PokeCenter, char *nomearquivo);
 void LiberaCP(CentroPesquisa *PokeCenter);
 
