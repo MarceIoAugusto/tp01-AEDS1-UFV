@@ -94,18 +94,24 @@ int Movimentacao(TipoPokemon *pokemon, TipoTreinador *treinador) {
     }
     return menor_indice;
 }
-void CapturaPokemon(TipoPokemon *pokemon, TipoTreinador *treinador, int indice) {
+int CapturaPokemon(TipoPokemon *pokemon, TipoTreinador *treinador, int indice) {
     // Retirando uma pokebola do Treinador
     treinador[indice].pokebolas--;
-    // Inserindo o pokemon capturado na lista do Treinador
+    // Verifica se as pokebolas do treinador acabaram
+    if (treinador[indice].pokebolas <= 0) {
+        return 1;
+    }
+    //  Inserindo o pokemon capturado na lista do Treinador
     InserePokemon(&treinador[indice].pokelista, pokemon);
+    return 0;
 }
 int RemoverPokemonTreinador(TipoTreinador *treinador, TipoPokemon *PokemonRetirado) {
     // Remove um pokemon da lista do treinador, retornando o pokemon removido da funçao
     if (RemovePokemon(&treinador->pokelista, &PokemonRetirado)) {
+
         // A lista ainda nao está vazia (return 0)
         return 0;
-
+    }
     // A lista ja está vazia (return 1)
     return 1;
 }
@@ -138,4 +144,9 @@ double getTreinadorDistancia(TipoTreinador *treinador) {
 }
 int getTreinadorPokebolas(TipoTreinador *treinador) {
     return treinador->pokebolas;
+}
+void RetornoTreinadorCP(TipoTreinador *treinador) {
+    treinador->pos[X] = 0;
+    treinador->pos[Y] = 0;
+    return;
 }

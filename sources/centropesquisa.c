@@ -27,7 +27,7 @@ void ImprimePokemonsFugitivo(CentroPesquisa *Pokecenter) {
     ImprimeLista(&Pokecenter->poke_fugitivos);
     return;
 }
-void InsercaoPokemonRecuperado(TipoPokemon *poke_recuperado, CentroPesquisa *PokeCenter, TipoTreinador *Treinador) {
+void InsercaoPokemonRecuperado(TipoPokemon *poke_recuperado, CentroPesquisa *PokeCenter) {
     // Insere o pokemon recuperado no final da lista de Pokemons Recuperados do PokeCenter
     InserePokemon(&PokeCenter->poke_recuperados, poke_recuperado);
     return;
@@ -48,4 +48,7 @@ int RecarregaPokbol(TipoTreinador *Treinador) {
 }
 TipoPokemon *setPokemonAlvo(CentroPesquisa *pokecenter) {
     return getPrimeiroItem(pokecenter->poke_fugitivos);
+}
+PokeLista *getListaCPFugitivos(CentroPesquisa *pokecenter) {
+    return &pokecenter->poke_fugitivos;
 }

@@ -19,6 +19,8 @@ int RemovePokemon(PokeLista *Lista, TipoPokemon *pokemon);
 int BuscaPokemon(PokeLista *Lista, int id, TipoPokemon *pokemon);
 void ImprimeLista(PokeLista *Lista);
 TipoPokemon *getPrimeiroItem(PokeLista Lista);
+int ListaEVazia(PokeLista *Lista);
+PokeLista *getListaCPFugitivos(CentroPesquisa *pokecenter);
 
 /* void getPrimeiroItem(PokeLista *Lista);
  */

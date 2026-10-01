@@ -20,10 +20,11 @@ typedef struct
 
 void inicializaTreinador(TipoTreinador *treinador, int ID, char *nomeTemp, int pokebolTemp);
 int leTreinador(FILE *arqtreinador, TipoTreinador *treinador, int id);
-void movimentacao(TipoPokemon *pokemon, TipoTreinador *treinador, int alvo);
+void Movimentacao(TipoPokemon *pokemon, TipoTreinador *treinador, int alvo);
 int CapturaPokemon(TipoPokemon *pokemon, TipoTreinador *treinador, int indice);
-TipoPokemon RemoverPokemonTreinador(TipoTreinador *treinador);
+int RemoverPokemonTreinador(TipoTreinador *treinador, TipoPokemon *PokemonRetirado);
 void ImprimeTreinador(TipoTreinador treinador);
+void RetornoTreinadorCP(TipoTreinador *treinador);
 
 // Funçoes para receber os dados do Treinador
 double *getTreinadorPos(TipoTreinador *treinador);

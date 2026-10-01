@@ -18,7 +18,7 @@ int RemovePokemon(PokeLista *Lista, TipoPokemon *pokemon) { /* Remove o Primeiro
     if (Lista->Primeiro->Proximo == NULL) {
         printf("\nErro Lista Vazia.");
         // avisa se foi o ultimo
-        return 1;
+        return 0;
     }
 
     Auxiliar = Lista->Primeiro->Proximo->Proximo;
@@ -26,7 +26,7 @@ int RemovePokemon(PokeLista *Lista, TipoPokemon *pokemon) { /* Remove o Primeiro
     free(Lista->Primeiro->Proximo);
     Lista->Primeiro->Proximo = Auxiliar;
 
-    return 0;
+    return 1;
 }
 
 int BuscaPokemon(PokeLista *Lista, int id, TipoPokemon *pokemon) { /* Busca o Pokemon na lista pelo ID e o retorna com parametro de saida */
